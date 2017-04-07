@@ -4,11 +4,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class AfterParty extends JavaPlugin
 {
+	
+	private PartyManager partyManager;
 	@Override
 	public void onEnable()
 	{
 		// TODO Auto-generated method stub
-		this.getCommand("party").setExecutor(new CommandManager());
+		partyManager = new PartyManager();
+		this.getCommand("party").setExecutor(new CommandManager(this));
 		loadPartys();
 	}
 
@@ -29,5 +32,9 @@ public class AfterParty extends JavaPlugin
 	{
 		// TODO Auto-generated method stub
 		
+	}
+
+	public PartyManager getPartyManager() {
+		return partyManager;
 	}
 }

@@ -8,6 +8,12 @@ import org.bukkit.entity.Player;
 
 public class CommandManager implements CommandExecutor
 {
+	
+	private AfterParty plugin;
+	
+	public CommandManager(AfterParty plugin) {
+		this.plugin = plugin;
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
@@ -43,9 +49,9 @@ public class CommandManager implements CommandExecutor
 				if (args[0].equalsIgnoreCase("check"))
 				{
 					Player p = (Player) sender;
-					if (Party.getPartyByMember(p.getUniqueId()) != null)
+					if (plugin.getPartyManager().getPartyByMember(p.getUniqueId()) != null)
 					{
-						p.sendMessage(Party.getPartyByMember(p.getUniqueId())
+						p.sendMessage(plugin.getPartyManager().getPartyByMember(p.getUniqueId())
 								.toString());
 						return true;
 					} else
@@ -61,10 +67,10 @@ public class CommandManager implements CommandExecutor
 				Player p = (Player) sender;
 				if (Bukkit.getPlayer(args[1]) != null)
 				{
-					if (Party.getPartyByMember(
+					if (plugin.getPartyManager().getPartyByMember(
 							Bukkit.getPlayer(args[1]).getUniqueId()) != null)
 					{
-						p.sendMessage(Party
+						p.sendMessage(plugin.getPartyManager()
 								.getPartyByMember(
 										Bukkit.getPlayer(args[1]).getUniqueId())
 								.toString());

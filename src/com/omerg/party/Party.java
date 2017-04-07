@@ -10,43 +10,12 @@ import net.md_5.bungee.api.ChatColor;
 
 public class Party
 {
-	public static List<Party> partys = new ArrayList<>();
-
-	private boolean isOpen;
+	private boolean isOpen = false;
 	private List<PartyMember> members = new ArrayList<PartyMember>();
 
-	public Party(UUID leader)
+	protected Party(UUID leader)
 	{
-		if (getPartyByMember(leader) == null)
-		{
-			createParty(leader);
-			partys.add(this);
-		} else
-			MessageSender.sendErrorMessage(leader,
-					"Error: Please leave your party to create a new one!");
-	}
-
-	public static Party getPartyByLeader(UUID leader)
-	{
-		for (Party par : partys)
-			if (par.getLeader().getPlayerID().equals(leader))
-				return par;
-		return null;
-	}
-
-	public static Party getPartyByMember(UUID member)
-	{
-		for (Party par : partys)
-			if (par.hasMember(member))
-				return par;
-		return null;
-	}
-
-	public void createParty(UUID leader)
-	{
-		this.setOpen(false);
-		this.addMember(leader, PartyRank.OWNER);
-		MessageSender.sendSuccssesMessage(leader, "You created a new party!");
+		addMember(leader, PartyRank.OWNER);
 	}
 
 	public PartyMember getLeader()
