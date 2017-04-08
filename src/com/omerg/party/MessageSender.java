@@ -37,4 +37,15 @@ public class MessageSender
 		p.sendMessage(prefix + ChatColor.GREEN + msg);
 		return true;
 	}
+	
+	public static boolean broadcastParty(Party p, String msg) {
+		if (p == null) {
+			return false;
+		}
+		for (PartyMember pm : p.getMembers())
+		{
+			MessageSender.sendInfoMessage(pm.getPlayerID(), msg);
+		}
+		return true;
+	}
 }

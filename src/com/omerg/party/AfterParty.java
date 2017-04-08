@@ -10,7 +10,7 @@ public class AfterParty extends JavaPlugin
 	public void onEnable()
 	{
 		// TODO Auto-generated method stub
-		partyManager = new PartyManager();
+		partyManager = new PartyManager(this);
 		this.getCommand("party").setExecutor(new CommandManager(this));
 		loadPartys();
 	}
